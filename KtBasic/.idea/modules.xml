@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KtBasic.iml" filepath="$PROJECT_DIR$/.idea/modules/KtBasic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KtBasic_main.iml" filepath="$PROJECT_DIR$/.idea/modules/KtBasic_main.iml" group="KtBasic" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KtBasic_test.iml" filepath="$PROJECT_DIR$/.idea/modules/KtBasic_test.iml" group="KtBasic" />
+    </modules>
+  </component>
+</project>

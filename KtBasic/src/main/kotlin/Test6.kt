@@ -35,4 +35,34 @@ fun main(args: Array<String>) {
     println(::sum)//拿不到
     println(::sum is (Int, Int) -> Int)//true
 
+    val input = readLine()
+    if (input != null) {
+        val split = input.split(" ")
+        val arg1 = split[0].toDouble()
+        val op = split[1]
+        val arg2 = split[2].toDouble()
+        println("$arg1 $op $arg2 = ${Operator(op).apply(arg1, arg2)}")
+    }
+
+}
+
+class Operator(op: String) {
+    //定义了一个lambda表达式
+    val opFun: (left: Double, right: Double) -> Double
+    //初始lambda表达式
+    init {
+        opFun = when(op) {
+            "+" -> {l, r -> l + r}
+            "-" -> {l, r -> l - r}
+            "*" -> {l, r -> l * r}
+            "/" -> {l, r -> l / r}
+            "%" -> {l, r -> l % r}
+            else -> {
+                throw UnsupportedOperationException(op)
+            }
+        }
+    }
+    fun apply(left: Double, right: Double): Double {
+        return opFun(left, right)
+    }
 }

@@ -1,4 +1,5 @@
 import java.io.BufferedReader
+import java.io.File
 import java.io.FileReader
 import java.util.ArrayList
 
@@ -27,7 +28,11 @@ fun main(args: Array<String>) {
     val pdfPrinter = PdfPrinter()
     args.forEach(pdfPrinter::println)
 
-    commonUse()
+//    commonUse()
+
+    //统计文件字符个数输出
+    File("build.gradle").readText().toCharArray().filterNot(Char::isWhitespace)
+            .groupBy { it }.map { it.key to it.value.size }.forEach(::print)
 
 }
 

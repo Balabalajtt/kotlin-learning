@@ -1,6 +1,6 @@
 package com.kotlin.user.presenter
 
-import com.kotlin.baselibrary.ext.excute
+import com.kotlin.baselibrary.ext.execute
 import com.kotlin.baselibrary.presenter.BasePresenter
 import com.kotlin.baselibrary.rx.BaseSubscriber
 import com.kotlin.user.presenter.view.RegisterView
@@ -16,7 +16,7 @@ class RegisterPresenter: BasePresenter<RegisterView>() {
          */
         val userService = UserServiceImpl()
         userService.register(mobile, verifyCode, pwd)
-                .excute(object : BaseSubscriber<Boolean>() {
+                .execute(object : BaseSubscriber<Boolean>() {
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult(t)
                     }

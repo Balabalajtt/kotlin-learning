@@ -1,10 +1,8 @@
 package com.kotlin.user.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.kotlin.baselibrary.ui.activity.BaseMvpActivity
 import com.kotlin.user.R
-import com.kotlin.user.R.id.mRegisterBtn
 import com.kotlin.user.presenter.RegisterPresenter
 import com.kotlin.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
@@ -23,7 +21,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         mPresenter.mView = this
 
         mRegisterBtn.setOnClickListener {
-            mPresenter.register("", "", "")
+            mPresenter.register(mMobileEt.text.toString(), mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
         }
     }
 }

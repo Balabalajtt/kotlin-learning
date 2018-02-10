@@ -1,9 +1,8 @@
 package com.example.zfquery.base
 
-import com.example.zfquery.base.BaseConstant.Companion.SERVER_ADDRESS
+import com.example.zfquery.base.BaseConstant.SERVER_ADDRESS
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -54,16 +53,9 @@ class RetrofitFactory private constructor() {
     private fun initClient(): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .addInterceptor(initLogInterceptor())
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build()
-    }
-
-    private fun initLogInterceptor(): Interceptor {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        return interceptor
     }
 
     fun <T> create(service: Class<T>) : T {

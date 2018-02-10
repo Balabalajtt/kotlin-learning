@@ -2,6 +2,7 @@ package com.example.zfquery.login
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.zfquery.R
@@ -10,17 +11,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.load.model.GlideUrl
-import com.example.zfquery.base.BaseConstant.Companion.CHECK_CODE_URL
-import com.example.zfquery.base.BaseConstant.Companion.SERVER_ADDRESS
-import com.example.zfquery.base.BaseResp
+import com.example.zfquery.base.BaseConstant.CHECK_CODE_URL
+import com.example.zfquery.base.BaseConstant.SERVER_ADDRESS
 import com.example.zfquery.base.execute
-import com.example.zfquery.base.BaseException
 import com.example.zfquery.base.BaseSubscriber
-import rx.Observable
-import rx.functions.Func1
+import okhttp3.ResponseBody
+import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
+
+    fun showToast() {
+        toast("111111111111111111")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,15 +66,10 @@ class MainActivity : AppCompatActivity() {
 
         RetrofitFactory.instance.create(LoginApi::class.java)
                 .login(map)
-                .flatMap(Func1<BaseResp<String>, Observable<Boolean>> { t ->
-                    if (t.status != 0) {
-                        return@Func1 Observable.error(BaseException(t.status, t.message))
-                    }
-                    Observable.just(true)
-                })
-                .execute(object : BaseSubscriber<Boolean>() {
-                    override fun onNext(t: Boolean) {
-
+                .execute(object : BaseSubscriber<ResponseBody>() {
+                    override fun onNext(t: ResponseBody) {
+                        showToast()
+                        Log.d("login", t.string())
                     }
                 })
     }

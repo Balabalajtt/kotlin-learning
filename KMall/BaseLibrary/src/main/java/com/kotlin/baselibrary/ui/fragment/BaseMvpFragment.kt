@@ -1,4 +1,4 @@
-package com.kotlin.baselibrary.ui.activity
+package com.kotlin.baselibrary.ui.fragment
 
 import android.os.Bundle
 import com.kotlin.baselibrary.common.BaseApplication
@@ -8,12 +8,13 @@ import com.kotlin.baselibrary.injection.module.ActivityModule
 import com.kotlin.baselibrary.injection.module.LifecycleProviderModule
 import com.kotlin.baselibrary.presenter.BasePresenter
 import com.kotlin.baselibrary.presenter.view.BaseView
+import com.kotlin.baselibrary.ui.activity.BaseActivity
 import javax.inject.Inject
 
 /**
  * Created by 江婷婷 on 2018/2/1.
  */
-open abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseView {
+open abstract class BaseMvpFragment<T: BasePresenter<*>> : BaseFragment(), BaseView {
 
     lateinit var activityComponent: ActivityComponent
 
@@ -26,10 +27,9 @@ open abstract class BaseMvpActivity<T: BasePresenter<*>> : BaseActivity(), BaseV
     abstract fun injectComponent()
 
     private fun initActivityInjection() {
-        activityComponent = DaggerActivityComponent
-                .builder()
-                .appComponent((application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(this))
+        activityComponent = DaggerActivityComponent.builder()
+                .appComponent((activity.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(activity))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
     }
